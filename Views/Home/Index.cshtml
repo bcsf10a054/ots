@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+
+
+
+
+  
+  <div class="photos">
+  <img src="~/images/1.jpg" alt="writing" />
+  <img src="~/images/2.jpg" alt="writing2" />
+  <img src="~/images/3.jpg" alt="writing3" />
+  <img src="~/images/4.jpg" alt="writing3" />
+  <img src="~/images/5.jpg" alt="writing3" />
+  </div>
+  <div id="sidebar">
+    <ul class="nav" >
+
+      <li>     <a href="#">Home</a>  </li>
+      <li>     @Html.ActionLink("Take Test","taketest","ManageQuiz")    </li>
+      <li>      @Html.ActionLink("Post Test","posttest","ManageQuiz") </li>
+      <li>      @Html.ActionLink("Contact Us","contactus","Home") </li>
+        @if( ((string)Session["admin"]) == "admin"  ){
+        <li>    @Html.ActionLink("User Management", "search","Home")</li>
+        <li>    @Html.ActionLink("Quiz Management", "searchtest","ManageQuiz")</li>
+        }
+      </ul>
+  </div>
+  <div id="maincontent">
+
+    <h2>Welcome Note</h2>
+    <h6 id="rs">
+    <p>Welcome to Online Testing Service. Here you can test and prepare yourself for educational perspective. Students and Teacher Both can enjoy to join us. Teachers can purticularly posts test and students can attempt them.</p>
+    </h6>
+
+  <h2>About US</h2>
+      <h6 id="rs2"><p>Onlince Testing Service is an online testing system which provides a basis for effective fulfillment of conducting online exam in an efficient manner. This system efficiently evaluates the candidates thoroughly through the fully automated system that gives fast result.</p>
+      </h6>
+  </div>
+  
+
+

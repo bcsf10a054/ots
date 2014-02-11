@@ -1,0 +1,149 @@
+﻿@model OTS.quiz
+@{
+    Layout = "~/Views/Shared/_take.cshtml";
+}
+<script>
+
+    var num = 0;
+    var answer;
+    var response;
+    var numberCorrect = 0;
+    var percentScore = 0;
+    var display;
+    // function to get subjects.
+    $(document).ready(function () {
+        // alert("hell");
+        $.getJSON("/ManageQuiz/GetSubject", function (data) {
+            // alert(data);
+            //' onclick = 'topic('"+item+"')
+            $.each(data, function (i, item) {
+                //        alert("usmmman");
+                $("#subj").append("<option value='" + item + "' onclick='topic()'>" + item + "</option>");
+                // $("#topic").append("<option value='" + item.topic + "'>" + item.topic + "</option>");
+            })
+
+        });
+    });
+    // function to get topics.
+    function topic() {
+        subject = $("#subj").val();
+        $("#topic option").remove();
+        // alert(subject);
+        $.getJSON("/ManageQuiz/GetTopic?subject=" + subject, function (data) {
+            //   alert(data);
+
+            $.each(data, function (i, item) {
+                //     alert("usmmman");
+                // $("#subj").append("<option value='" + item + "'>" + item + "</option>");
+                $("#topic").append("<option value='" + item + "'>" + item + "</option>");
+            })
+
+        });
+    }
+    // to get questions based on subject and topic.
+    function getquestions() {
+
+        var subject2 = $("#subj").val();
+        var topic2 = $("#topic").val();
+        var tmp;
+        //  alert(country);
+        if (subject2 != "abc" && topic2 != "abc") {
+
+            $.getJSON("/ManageQuiz/GetQuestions?subject=" + subject2 + "&topic=" + topic2, function (data) {
+                //alert(data);
+                //  $("#table1").append("<tr><th>UserName</th><th>Name</th><th>Cell</th><th>Country</th><th>Delete</th><th>Edit</th></tr>");
+
+                //count the number of questions.
+                $.each(data, function (i, item) {
+                    num++;
+                });
+                
+                answer = new Array(num+1);
+                response = new Array(num+1);
+                //fill the answer array with key values.
+                $.each(data, function (i, item) {
+                    answer[i + 1] = item.key;
+                    response[i + 1] = "thisisonlinetestingservice";
+                });
+
+                $.each(data, function (i, item) {
+                    //     alert("us,mmman");
+                    tmp = i + 1;
+                    $("#table2").append("<tr><td>" + item.question + "</td></tr>"); 
+                    $("#table2").append("<tr><td><input required type='radio' name='" + tmp + "' value='" + item.op1 + "' onclick='fillArray(" + tmp + ",this.value)'/>" + item.op1 + "</td></tr>");
+                    $("#table2").append("<tr><td><input required type='radio' name='" + tmp + "' value='" + item.op2 + "' onclick='fillArray(" + tmp + ",this.value)'/>" + item.op2 + "</td></tr>");
+                    $("#table2").append("<tr><td><input required type='radio' name='" + tmp + "' value='" + item.op3 + "' onclick='fillArray(" + tmp + ",this.value)'/>" + item.op3 + "</td></tr>");
+                    $("#table2").append("<tr><td><input required type='radio' name='" + tmp + "' value='" + item.op4 + "' onclick='fillArray(" + tmp + ",this.value)'/>" + item.op4 + "</td></tr>");
+
+                   
+
+                })
+
+            });
+        }
+        else {
+            alert("Select a Subject");
+            $("#subj").focus();
+        }
+        // alert("out of json");
+    }
+
+    
+
+  
+    //function to assign the user reponses to an array
+    function fillArray(questionNumber, userResponse) {
+       // alert(questionNumber + "   " + userResponse);
+        response[questionNumber] = userResponse;
+    }
+
+    //function to grade the quiz after user responses are given and also build the display box
+    function GradeTheQuiz() {
+        
+        display = "Multiple Choice Quiz\n============\n";
+        for (i = 1; i <= num; i++) {
+          //  alert("response " + response[i]);
+            display = display + i + ".";
+           if (answer[i] != response[i]) {
+                display = display + "  Sorry. Not Correct." + "\n";
+            }
+            else {
+                display = display + "  CORRECT! \n";
+                numberCorrect++;
+            }
+        }
+
+        percentScore = (numberCorrect / num) * 100;
+        display = display + "============\nSCORE = " + percentScore + " %";
+
+        //display the box
+        alert(display);
+
+        numberCorrect = 0;
+        percentScore = 0;
+    }
+
+
+    
+
+</script>
+  <div id="maincontent">
+   <p style="font-family: 'Courier New';margin-left:20px">Search Users based on Subject and Topic</p>
+  <p style="font-family: 'Courier New';margin-left:20px"><b>Solve All Questions</b></p>
+      
+  <select style="margin-left:20px" name="subject" id="subj">
+      <option value="abc">Select Subject</option>
+  </select>
+  <select name="topic" id="topic" >
+          	<option value="abc">Select Topic</option>
+   </select>
+  <input class="button" type="button" value="search" id="b3" onclick="getquestions()" />
+   <div>
+         <table id="table2">
+
+      </table>
+      <input  class="button" type="button" onClick="GradeTheQuiz()" value="Check Answers"/>
+  </div>
+ </div>
+
+ 

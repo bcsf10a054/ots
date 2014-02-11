@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_post.cshtml";
+}
+  <div id="header">
+    <div class="logo"><img src="~/images/logo3.png" width="1800" height="1200" alt="logo" /></div>
+
+    <div class="head_nav">
+      <ul>
+        <li>@Html.ActionLink("Home","Index","Home")</li>
+        <li>@Html.ActionLink("Take Test","taketest","ManageQuiz")</li>
+        <li><a href="#">Post Test</a></li>
+        <li>@Html.ActionLink("Contact Us","contactus","Home")</li>
+        <li>@Html.ActionLink("Sing Up","signup","Home")</li>
+      </ul>
+    </div>
+  </div>
+@if ((((string)Session["admin"]) == "admin") || ((string)Session["teacher"]) == "teacher")
+{
+
+
+  <div id="maincontent" >
+      <div>
+          <form id="myform2" name="fileupload" action="/home/savefile" method="post" enctype="multipart/form-data" >
+
+            Upload File: <input type="file" name="file" />
+            <input type="submit" value="Upload" onClick='return validateFileUpload()' />
+         </form>
+
+      </div>
+<form action="/ManageQuiz/saveQuiz" method="post" enctype="multipart/form-data" name="form1" id="myform">
+  <p align="center">
+  <label>Subject:</label>
+    <input type="text" name="subject" id="subject" cols="25" rows="1"/>
+  
+  <label>Topic:</label>
+    <input type="text" name="topic" id="topic" cols="25" rows="1"/>
+      <input class="button" type="submit"  value = "Submit" onclick='return validateForm()'/>
+        <input class="button" type="reset" value="Reset Form" onClick = 'clearAll()'/>
+  </p>
+  <p align="center">Note: Enter Your Questions uniquely and do not let any option empty. You can enter Only 10 Questions by Clicking Add Button.</p>
+
+
+
+</form>
+<button class="button" onClick="myFunction()">Add Another Question</button>
+</div>
+}
+else
+{
+    <h4>Login as Teacher or Admin</h4>
+}
+
+
+   

@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Views/Shared/_signup.cshtml";
+}
+  <div id="maincontent">
+      
+    <form id="myform" name="form1" method="post" action="/Home/adduser">
+      <fieldset>
+        <legend>Account Info:</legend>
+        <p>
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" tabindex="10"  />
+            <input type="button" id="b1" value="Check" />
+        </p>
+        <p>
+          <label for="pwd">Password</label>
+          <input type="password" name="password" id="pwd" tabindex="20" />
+        </p>
+        
+      </fieldset>
+      <fieldset>
+        <legend>Personal Info:</legend>
+        <p>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" tabindex="40" />
+        </p>
+        <p>
+          <label for="cell">Contact No.</label>
+          <input type="text" name="cell" id="cell" tabindex="50" title="Enter your cell no e.g. 0343XXXXXXX" />
+        </p>
+        <p>
+          <label for="occupation">Occupation</label>
+          <select name="occup" id="occupation" tabindex="60">
+          	<option value="ch">Choose</option>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+          </select>
+        </p>
+        <p>Gender
+          <input type="radio" name="gender" id="male" value="male" tabindex="70" checked="checked" />
+          <label for="male">Male</label>
+          <input type="radio" name="gender" id="female" value="female" tabindex="80" />
+          <label for="female">Female</label>
+        </p>
+        <p>
+          <label for="country">Your Country</label>
+          <input type="text" name="country" id="country" tabindex="90" />
+        </p>
+      </fieldset>
+        <label for="reset"></label>
+    <input class="button" type="reset" name="reset" id="reset" value="Reset" tabindex="110" onclick='clearAll()' />
+    <label for="submit"></label>
+    <input class="button" type="submit" name="submit" id="submit" value="Submit" tabindex="100" onclick='return validate()'/>
+    </form>
+    
+  </div>
