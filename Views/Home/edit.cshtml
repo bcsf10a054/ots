@@ -1,0 +1,72 @@
+﻿@model OTS.user 
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_signup.cshtml"; 
+
+}
+
+<h2 style="font-family:'Courier New';margin-left:30px">Edit User</h2>
+
+@using (Html.BeginForm()) {
+   
+
+    <fieldset>
+        <legend>User Data</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.Label("User Name")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.username)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Password ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.password)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Name ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.name)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Cell #")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.cell)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label("Occupation")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.occup)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Country ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.country)
+           
+        </div>
+
+        <p>
+            <input class="button" type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Search", "search")
+</div>
+
+

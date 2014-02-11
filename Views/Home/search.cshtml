@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Views/Shared/_signup.cshtml"; 
+}
+
+<p style="font-family: 'Courier New';margin-left:20px">Search Users based on Country</p>
+<input type="text" id="search" name="search"  size="35" required/> 
+<input class="button" type="submit" name="submit" value="Search All" id="b5" onclick='getAllUsers()' />
+<input class="button" type="submit" name="submit" value="search" id="b4" onclick='getUser()' />
+
+<table id="table1" style="margin-left:30px;text-align:justify;font-family: 'Courier New', Times, serif; color:aliceblue" border="1">
+    
+
+</table>
+<script>
+
+    function getUser() {
+
+        var country = $("#search").val();
+       //  alert(country);
+        if (country != "") {
+            
+
+            $("#table1 tr").remove();
+            $.getJSON("/Home/GetUsers?country=" + country, function (data) {
+                //alert(data);
+                $("#table1").append("<tr><th>UserName</th><th>Password</th><th>Name</th><th>Cell</th><th>Role</th><th>Country</th><th>Delete</th><th>Edit</th></tr>");
+                $.each(data, function (i, item) {
+                    //     alert("us,mmman");
+                    $("#table1").append("<tr><td>" + item.username + "</td><td>" + item.password + "</td><td>" + item.name + "</td><td>" + item.cell + "</td><td>" + item.occup + "</td><td>" + item.country + "</td><td><input class='button' type='button' value='Delete' onclick='deleteUser(" + item.Id + ", 1)'/></td><td><form action='/Home/edit/" + item.Id + "' method='get'><input class='button' type='submit' value='Edit'/></form></td></tr>");
+
+                })
+
+            });
+        }
+        else {
+            alert("Enter country Name");
+            $("#search").focus();
+        }
+        // alert("out of json");
+    }
+    function deleteUser( id,num)
+    {
+       // alert("User Deleted " + id + " country is " + num);
+        $.getJSON("/Home/delete?id=" + id, function (data) {
+          //  alert(data);
+        });
+        if (num == 1)
+            getUser();
+        else if (num == 2)
+            getAllUsers();
+        
+    }
+    function getAllUsers()
+    {
+        $.getJSON("/Home/GetAllUsers" , function (data) {
+          //  alert(data);
+            $("#table1 tr").remove();
+            $("#table1").append("<tr><th>UserName</th><th>Password</th><th>Name</th><th>Cell</th><th>Role</th><th>Country</th><th>Delete</th><th>Edit</th></tr>");
+            $.each(data, function (i, item) {
+                //     alert("us,mmman");
+                $("#table1").append("<tr><td>" + item.username + "</td><td>" + item.password + "</td><td>" + item.name + "</td><td>" + item.cell + "</td><td>" + item.occup + "</td><td>" + item.country + "</td><td><input class='button' type='button' value='Delete' onclick='deleteUser(" + item.Id + ",2)'/></td><td><form action='/Home/edit/" + item.Id + "' method='get'><input class='button' type='submit' value='Edit'/></form></td></tr>");
+
+            })
+
+        });
+    }
+</script>

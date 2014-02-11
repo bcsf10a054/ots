@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "_signup";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Online Testing Service</title>
+<link href="~/Content/signup.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
+
+<script>
+function clearAll()
+{
+	document.getElementById("myform").reset();
+}
+function validate()
+{
+	
+	var form3 = document.getElementById("myform");
+	var i = 0;
+	
+	if( form3[1].value != ""  )
+	{
+		var flag = email( form3[1].value );
+		if( !flag )
+		{
+			alert("Enter it in correct format e.g. example@yahoo.com");
+			form3[1].focus();
+		}
+		if( flag )
+			i++;
+	}
+	else
+	{
+		alert("Enter your UserName");
+		form3[1].focus();
+	}
+	if ( i == 1 )
+	{
+		if( form3[3].value != "" )
+		{
+			//if( form3[3].value != "" )
+			//{
+			  //  var f = form3[2].value.match(form3[3].value);
+				//var f = pass(form3[2].value,form3[3].value);
+			//	if( !f )
+			//	{
+				//	alert("Password not Match");
+			//		form3[2].focus();
+				//}
+	    //if( f )
+	  //  alert(i);
+	    i++;
+	   // alert(i);
+			}
+			else
+			{
+				alert("Enter your password");
+				form3[3].focus();
+			}
+		//}
+		
+	}
+	
+	if( i == 2 )
+	{
+		if ( form3[5].value == "" )
+		{
+			
+			alert("Enter your name");
+			form3[5].focus();
+		}
+		else if( form3[5].value != "" )
+			i++;
+	}
+	if( i == 3 )
+	{
+		if( form3[6].value.length == 10 )
+		{
+			var f2 = num(form3[6].value);
+			if( !f2 )
+			{
+				alert("Please Enter Numbers Only");
+				form3[6].focus();
+			}
+			if( f2 )
+			{
+				i++;
+			}
+		}
+		else
+		{
+			form3[6].focus();
+			alert("Enter your Cell No and it should be 10 character long");
+		}
+	}
+	if( i == 4 )
+	{
+		if( form3[7].value == "ch" )
+		{
+			alert("Please select the option");
+			form3[7].focus();
+		}
+		if( form3[7].value != "ch" )
+			i++;
+	}
+	if( i == 5 )
+	{
+		if( form3[8].value == "male" || form3[9].value == "female" )
+		{
+			i++;
+		}
+	}
+	if( i == 6 )
+	{
+		if(form3[10].value != "" )
+		{
+			i++;
+		}
+		else
+		{
+			alert("Enter your country");
+			form3[10].focus();
+		}
+	}
+	if (i == 7) {
+	    form3.onsubmit();
+	}
+    else
+	    return false;
+		
+}
+function email( em )
+{
+    var emailExp = /^([a-zA-Z0-9_\.\-])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+ 
+	return em.match( emailExp );
+    
+    
+}
+function pass( p1, p2)
+{
+	return p1.match(p2);
+}
+function num( n )
+{
+	var num2 =  /^[0-9]+$/;
+	return n.match( num2 );
+}
+
+
+
+
+
+</script>
+
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="logo"><img src="~/images/logo3.png" width="1800" height="1200" alt="logo" /></div>
+
+    <div class="head_nav">
+      <ul>
+        <li>@Html.ActionLink("Home","Index","Home")</li>
+        <li>@Html.ActionLink("Take Test","taketest","ManageQuiz")</li>
+        <li>@Html.ActionLink("Post Test","posttest","ManageQuiz")</li>
+        <li>@Html.ActionLink("Contact Us","contactus","Home")</li>
+        <li>@Html.ActionLink("Sign Up","signup","Home")</li>
+      </ul>
+    </div>
+  </div>
+
+    @RenderBody()
+
+    <div id="footer"><hr /><p align="center">Copyright &copy | All rights reserved</p></div>
+</div>
+</body>
+</html>
+

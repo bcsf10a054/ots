@@ -1,0 +1,104 @@
+﻿@model OTS.quiz
+@{
+    Layout = "~/Views/Shared/_take.cshtml";
+}
+<script>
+
+     // function to get subjects.
+    
+    function getsubject() {
+        $.getJSON("/ManageQuiz/GetSubject", function (data) {
+            $.each(data, function (i, item) {
+                
+                $("#subj").append("<option value='" + item + "' onclick='topic()'>" + item + "</option>");
+                
+            })
+
+        });
+    }
+    $(document).ready(getsubject);
+
+
+
+    // function to get topics.
+    function topic() {
+        subject = $("#subj").val();
+        $("#topic option").remove();
+       
+        $.getJSON("/ManageQuiz/GetTopic?subject=" + subject, function (data) {
+            $.each(data, function (i, item) {
+                $("#topic").append("<option value='" + item + "'>" + item + "</option>");
+            })
+
+        });
+    }
+    // to get questions based on subject and topic.
+    function getquestions() {
+
+        var subject2 = $("#subj").val();
+        var topic2 = $("#topic").val();
+       // alert("subject is" + subject2 + "\ntopic is" + topic2);
+        if (subject2 != "abc" && topic2 != "abc") {
+
+            $.getJSON("/ManageQuiz/GetQuestions?subject=" + subject2 + "&topic=" + topic2, function (data) {
+
+                $("#table2 tr").remove();
+               // alert(data);
+                $("#table2").append("<tr><th>Question</th><th>Option1</th><th>Option2</th><th>Option3</th><th>Option4</th><th>Key</th><th>Edit</th><th>Delete</th></tr>");
+                $.each(data, function (i, item) {
+                    
+                    tmp = i + 1;
+                    $("#table2").append("<tr><td>" + item.question + "</td>" +
+                            "<td>"+ item.op1 +"</td><td>"+item.op2+"</td><td>" +
+                            item.op3 + "</td><td>" + item.op4 + "</td><td>" + item.key + "</td><td><form action='/ManageQuiz/edittest/" + item.Id + "' method='get'><input class='button' type='submit' value='Edit'/></form></td>" +
+                            "<td><input class='button' type='button' value='Delete' onclick='deleteQuiz(" + item.Id + ")'/></td></tr>");
+                    
+                   
+
+                })
+
+            });
+        }
+        else {
+            alert("Select a Subject");
+            $("#subj").focus();
+        }
+        // alert("out of json");
+    }
+
+    function deleteQuiz(id) {
+        
+        $.getJSON("/ManageQuiz/deleteQuiz?id=" + id, function (data) {
+            if (data) {
+                alert("Quiz Deleted\nRefreshing Page...");
+                window.location.reload(true);
+            }
+        });
+        
+/*        $("#subj option").remove();
+        getsubject();
+        topic();
+        */
+    }
+
+</script>
+  <div id="maincontent" style="width:800px;margin-right:50px">
+   <p style="font-family: 'Courier New';margin-left:20px">Search Users based on Subject and Topic</p>
+  
+      
+  <select style="margin-left:20px" name="subject" id="subj">
+      <option value="abc">Select Subject</option>
+  </select>
+  <select name="topic" id="topic" >
+          	<option value="abc">Select Topic</option>
+   </select>
+  <input class="button" type="button" value="search" id="b3" onclick="getquestions()" />
+   <div>
+         <table id="table2" border="1">
+
+      </table>
+      
+  </div>
+ </div>
+
+ 

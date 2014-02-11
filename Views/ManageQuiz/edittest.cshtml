@@ -1,0 +1,85 @@
+﻿@model OTS.quiz 
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_signup.cshtml"; 
+
+}
+
+<h2 style="font-family:'Courier New';margin-left:30px">Edit Question</h2>
+
+@using (Html.BeginForm()) {
+   
+
+    <fieldset>
+        <legend>Question</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.Label(" Subject ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.subject)
+       </div>
+            <div class="editor-label">
+            @Html.Label(" Topic ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.topic)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label(" Question ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.question)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Option1 ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.op1)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Option2 ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.op2)
+           
+        </div>
+
+        <div class="editor-label">
+            @Html.Label(" Option3 ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.op3)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Option4 ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.op4)
+           
+        </div>
+        <div class="editor-label">
+            @Html.Label(" Key ")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.key)
+           
+        </div>
+        <p>
+            <input class="button" type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Search", "searchtest","ManageQuiz")
+</div>
+
+

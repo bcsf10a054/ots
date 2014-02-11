@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "_post";
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Online Testing Service</title>
+
+<link href="~/Content/posttest.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var count = 1;
+var id2 = 1;
+function myFunction()
+{
+
+	if( count <= 10 )
+	{
+		var fm = document.getElementById("myform");
+		var pr = document.createElement("p");
+		var str = id2 + '';
+		pr.setAttribute("id",str);
+		pr.innerHTML  = str + ' Question :<input name="question"  type = "text" col = "45" row="1" style="width:405px" >' +
+						'<br/>' +
+						' Option1 :<input name="op1" type = "text" width = "20" style="margin-left:20px; margin-top:20px" >' +
+						' Option2 :<input name="op2" type = "text" width = "20" style = "margin-left : 20px" >' + '<br/>' +
+						' Option3 :<input name="op3" type = "text" width = "20" style = "margin-left : 20px ; margin-top:10px" >' +
+						' Option4 :<input name="op4" type = "text" width = "20" style = "margin-left : 20px" >' + '<br/>' +
+						' Key:<input name="key" type = "text" width = "20" style = "margin-left : 63px;margin-top:10px" >' +
+						 '<input id = "23"; type = "button" onclick = "removeEle( parentNode )" value = "Remove" style = "margin-left: 110px"> ';
+
+		count++;
+		id2++;
+		fm.appendChild( pr );
+	}
+	else
+	{
+		alert( "You have exceed the limit");
+	}
+
+}
+function removeEle( f )
+{
+   var fm = document.getElementById("myform");
+
+   var ln = document.getElementById(f.id);
+   fm.removeChild(ln);
+   count--;
+   }
+function clearAll()
+{
+	document.getElementById("myform").reset();
+}
+function validateFileUpload()
+{
+    var f = document.getElementById("myform2");
+    if (f[0].value == "") {
+        alert("Field should not be empty");
+        f[0].focus();
+    }
+    else
+    {
+        document.getElementById("myform2").onsubmit();
+    }
+    return false;
+}
+function validateForm()
+{
+
+	var form1 = document.getElementById("myform");
+	var i;
+	var n = 2;
+	var flag = 0;
+	var ok = 1;
+	if( flag == 0 )
+	{
+		if( form1[0].value == "" )
+		{
+		    alert("Field shoud not be empty");
+		    ok = 0;
+			form1[0].focus();
+		}
+		else
+		{flag++;}
+	}
+
+	if( flag == 1 )
+	{
+		if( form1[1].value == "" )
+		{
+		    alert("Field should not be empty");
+		    ok = 0;
+			form1[1].focus();
+		}
+		else
+		{flag++;}
+	}
+	if( flag == 2 ){
+	var checkKey = 9;
+	for( i = 4; i < form1.length;i++)
+	{
+		if( form1[i].value != "" )
+		{
+			if( i == checkKey )
+			{
+				checkKey = checkKey + 7 ;
+				var c =	validateKey( form1[i].value,form1[i-1].value,form1[i-2].value,form1[i-3].value,form1[i-4].value );
+				if( !c )
+				{
+				    alert("Key should be match one of the options");
+				    ok = 0;
+					form1[i].focus();
+					break;
+				}
+			}
+
+		}
+		else
+		{
+		    alert("Field shoud not be empty");
+		    ok = 0;
+			form1[i].focus();
+			break;
+		}
+	}
+} // end of flag == 3
+	if (ok)
+	    form1.submit();
+	else
+	    return false;
+}
+function validateKey( key,op4,op3,op2,op1)
+{
+	if( key.match(op4) )
+	{
+		return true;
+	}
+	else if( key.match(op3) )
+	{
+		return true;
+	}
+	else if( key.match(op2) )
+	{
+		return true;
+	}
+	else if( key.match(op1) )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+function numbers( num )
+{
+	var numeric = /^[0-9]+$/;
+	return num.match(numeric);
+}
+function letters( let )
+{
+	var alpha = /^[a-zA-Z]+$/;
+	return let.match(alpha);
+}
+
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+    
+    @RenderBody()
+
+</div>
+</body>
+</html>

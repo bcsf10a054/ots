@@ -1,0 +1,151 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	background-color: #DCDCDC;
+	background-image: url(../images/GridBackground.jpg);
+	height: 100%;
+	width: 100%;
+	background-repeat: repeat;
+}
+#wrapper {
+	background-color: #73880A;
+	padding: 0px;
+	width: 900px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	border: 2px solid #3D4045;
+}
+#header {
+	margin: 0px;
+	padding: 5px;
+	height: 150px;
+	width: 890px;
+	background-color: #000000;
+	background-image: url(~/images/header3.jpg);
+}
+
+
+
+
+#maincontent {
+	float: right;
+	width: 700px;
+	border: 3px solid #EEEEEE;
+	margin-right: 90px;
+	margin-left: 50px;
+}
+#wrapper #maincontent #form1 {
+	padding: 20px;
+	margin-left: 30px;
+}
+
+legend {
+	border: 3px solid #EEE;
+	background-color: #8B4513;
+}
+
+
+#wrapper #maincontent p {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 17px;
+	line-height: 1.5em;
+	font-weight: normal;
+	margin-left: 20px;
+	text-align: justify;
+	margin-right: 20px;
+	margin-top: 2px;
+}
+
+#footer {
+	clear: both;
+	padding-top: 5px;
+}
+#wrapper #footer hr {
+	margin-top: 20px;
+}
+
+#wrapper #footer p {
+	margin-bottom: 0px;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+.nav {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFF;
+	margin: 5px;
+	padding: 5px;
+	height: 200px;
+	width: 200px;
+	margin-left: 20px;
+	line-height: 1.5em;
+	text-align: left;
+}
+.logo {
+	margin: 0px;
+	padding: 0px;
+	height: 158px;
+	width: 300px;
+	float: left;
+}
+.logo img {
+	margin: 0px;
+	padding: 5px;
+	height: 150px;
+	width: 300px;
+}
+
+.head_nav {
+	margin: 0px;
+	padding: 5px;
+	height: 70px;
+	width: 500px;
+	float: right;
+	margin-top: 80px;
+}
+#wrapper #header .head_nav ul {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFF;
+	display: inline;
+	margin-top: 30px;
+	float: left;
+	margin-left: 0px;
+}
+#wrapper #header .head_nav ul li {
+	display: inline;
+	color: #FFF;
+	margin-left: 10px;
+}
+#wrapper #header .head_nav ul li a {
+	color: #FFF;
+	vertical-align: bottom;
+	margin-bottom: -30px;
+}
+fieldset {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFF;
+	margin-left: 30px;
+	border: 3px solid #EEEEEE;
+	background-color: #8B4513;
+	padding: 3px;
+	margin-right: 300px;
+	margin-bottom: -27px;
+	margin-top: 40px;
+	width: 400px;
+}
+.button {
+	background-color: #8B4513;
+	color: #FFF;
+	text-align: center;
+	float: right;
+	margin: 5px;
+	margin-right: 10px;
+}
